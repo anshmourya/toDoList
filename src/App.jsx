@@ -1,13 +1,14 @@
 import React from "react";
-import SideBar from "./components/SideBar";
-import { Box } from "@mui/material";
-import Home from "./pages/Home";
+import Home from "./pages/Home/Home";
 import "./styles/styles.css";
+import { SliderBarProvider } from "./hooks/SideBar/SliderBarData";
 
 function App() {
   return (
     <>
-      <Home />
+      <SliderBarProvider>
+        <Home />
+      </SliderBarProvider>
     </>
   );
 }

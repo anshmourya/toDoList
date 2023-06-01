@@ -1,4 +1,5 @@
-import * as React from "react";
+import React, { useContext } from "react";
+import { SliderBar } from "../../hooks/SideBar/SliderBarData";
 import { styled, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
 import List from "@mui/material/List";
@@ -12,6 +13,10 @@ import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import ListItemText from "@mui/material/ListItemText";
 import MailIcon from "@mui/icons-material/Mail";
+import BuyBtn from "../buttons/BuyBtn";
+import BalBtn from "../buttons/BalBtn";
+import LanguageIcon from "@mui/icons-material/Language";
+import Themebtn from "../buttons/tooglebtn/themebtn";
 
 const drawerWidth = 240;
 
@@ -52,7 +57,7 @@ const Drawer = styled(MuiDrawer, {
   flexShrink: 0,
   whiteSpace: "nowrap",
   boxSizing: "border-box",
-  border: "1px solid red",
+  borderRight: "2px solid #242731",
   ...(open && {
     ...openedMixin(theme),
     "& .MuiDrawer-paper": {
@@ -68,18 +73,24 @@ const Drawer = styled(MuiDrawer, {
       ...closedMixin(theme),
       backgroundColor: "black",
       color: "white",
+      borderRight: "2px solid #242731",
     },
   }),
 }));
 
 function SideBar() {
   const theme = useTheme();
-  const [open, setOpen] = React.useState(true);
+  const { open, setOpen } = useContext(SliderBar);
 
   return (
     <>
       <CssBaseline />
-      <Drawer variant="permanent" open={open} className="relative">
+      <Drawer
+        variant="permanent"
+        open={open}
+        className="relative"
+        sx={{ zIndex: 1201 }}
+      >
         {open ? (
           <>
             <DrawerHeader
@@ -164,7 +175,7 @@ function SideBar() {
                       <ListItemText
                         primary={text}
                         sx={{ opacity: open ? 1 : 0 }}
-                        className="px-3 capitalize text-gray-500 font-semibold text-sm"
+                        className="px-3 text-sm font-semibold text-gray-500 capitalize"
                       />
                     )}
                   </ListItemIcon>
@@ -176,11 +187,15 @@ function SideBar() {
         </List>
 
         {open ? (
-          <ul className="absolute bottom-16">
-            <li>
-              <button>ansh</button> <button>ansh</button>
+          <ul className="absolute mx-5 bottom-16">
+            <li className="flex items-center justify-center gap-4 ">
+              <BuyBtn />
+              <BalBtn />
             </li>
-            <li></li>
+            <li className="flex items-center justify-start gap-4 mt-5">
+              <LanguageIcon />
+              <Themebtn />
+            </li>
           </ul>
         ) : (
           <></>

@@ -7,9 +7,13 @@ import PlusBtn from "../buttons/Editbtns/PlusBtn";
 import { BsPencilFill } from "react-icons/bs";
 
 function AddTodo({ listId, todoitem }) {
+  // Accessing the SliderBar context to control the right sidebar state
   const { setRightBarOpen, rightBarOpen } = useContext(SliderBar);
+
+  // Accessing the ListData context to set and retrieve todo data
   const { setTodoData, todoData } = useContext(ListData);
 
+  // Function to handle adding a new todo
   const handleAddTodo = () => {
     setTodoData({
       listId,
@@ -40,6 +44,7 @@ function AddTodo({ listId, todoitem }) {
               setTodoData({ ...todoData, title: e.target.value })
             }
           />
+          {/* Render the PlusBtn component if todoitem is not provided, otherwise render the pencil icon */}
           {!todoitem ? (
             <PlusBtn fun={handleAddTodo} />
           ) : (

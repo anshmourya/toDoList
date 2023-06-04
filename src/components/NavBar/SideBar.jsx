@@ -20,6 +20,7 @@ import Themebtn from "../buttons/tooglebtn/themebtn";
 
 const drawerWidth = 240;
 
+// Mixins for the opened and closed state of the drawer
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -41,6 +42,7 @@ const closedMixin = (theme) => ({
   },
 });
 
+// Styled component for the drawer header
 const DrawerHeader = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
@@ -50,6 +52,7 @@ const DrawerHeader = styled("div")(({ theme }) => ({
   ...theme.mixins.toolbar,
 }));
 
+// Styled component for the drawer
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -92,6 +95,7 @@ function SideBar() {
         sx={{ zIndex: 1201 }}
       >
         {open ? (
+          // Render the header when the drawer is open
           <>
             <DrawerHeader
               style={{
@@ -122,6 +126,7 @@ function SideBar() {
             </DrawerHeader>
           </>
         ) : (
+          // Render only the toggle button when the drawer is closed
           <IconButton onClick={() => setOpen(!open)}>
             {theme.direction === "rtl" ? (
               <ChevronRightIcon className="text-white" />
@@ -135,6 +140,7 @@ function SideBar() {
         <List>
           {["Inbox", "Starred", "Send email", "Drafts"].map((text) => {
             return (
+              // Render list items for each menu item
               <ListItem
                 key={text}
                 sx={{
@@ -187,6 +193,7 @@ function SideBar() {
         </List>
 
         {open ? (
+          // Render additional buttons in an absolute positioned list when the drawer is open
           <ul className="absolute mx-5 bottom-16">
             <li className="flex items-center justify-center gap-4 ">
               <BuyBtn />

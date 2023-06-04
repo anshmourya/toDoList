@@ -4,18 +4,20 @@ import SideBar from "../../components/NavBar/SideBar";
 import Content from "./PageCompo/Content";
 
 function Home() {
+  // Access the 'openStyle' and 'rightBarOpen' values from the SliderBar context
   const { openStyle, rightBarOpen } = useContext(SliderBar);
+
   return (
     <>
       <div className="">
-        <SideBar />
+        <SideBar /> {/* Render the SideBar component */}
         <div
           style={{
             paddingLeft: openStyle,
             paddingRight: !rightBarOpen ? "0px" : "285px",
           }}
         >
-          <Content />
+          <Content /> {/* Render the Content component */}
         </div>
       </div>
     </>

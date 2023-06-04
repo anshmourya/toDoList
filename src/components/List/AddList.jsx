@@ -1,12 +1,15 @@
 import React, { useState, useContext } from "react";
-
 import { ListData } from "../../hooks/ListHooks/ListData";
 import PlusBtn from "../buttons/Editbtns/PlusBtn";
 
 function AddList({ title }) {
+  // Accessing the lists data and addList function from the ListData context
   const { addList, lists } = useContext(ListData);
+
+  // State to store the data of a single list item
   const [singleListData, setSingleListData] = useState({ id: 0, title: title });
 
+  // Function to handle adding a new list
   const handleAddList = () => {
     if (!title) {
       if (!singleListData.title) {
@@ -39,6 +42,7 @@ function AddList({ title }) {
             setSingleListData({ ...singleListData, title: e.target.value })
           }
         />
+        {/* Render the PlusBtn component only if the title prop is not provided */}
         {!title && <PlusBtn fun={handleAddList} />}
       </div>
     </>

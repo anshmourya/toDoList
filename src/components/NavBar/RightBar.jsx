@@ -9,6 +9,7 @@ import SaveBtn from "../buttons/Editbtns/SaveBtn";
 
 const drawerWidth = 287;
 
+// Styling mixin for an opened drawer
 const openedMixin = (theme) => ({
   width: drawerWidth,
   transition: theme.transitions.create("width", {
@@ -18,6 +19,7 @@ const openedMixin = (theme) => ({
   overflowX: "hidden",
 });
 
+// Styling mixin for a closed drawer
 const closedMixin = (theme) => ({
   transition: theme.transitions.create("width", {
     easing: theme.transitions.easing.sharp,
@@ -30,6 +32,7 @@ const closedMixin = (theme) => ({
   },
 });
 
+// Styling the MuiDrawer component using the styled function from @mui/material
 const Drawer = styled(MuiDrawer, {
   shouldForwardProp: (prop) => prop !== "open",
 })(({ theme, open }) => ({
@@ -61,6 +64,7 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function RightBar() {
+  // Accessing the context using useContext
   const { rightBarOpen, setRightBarOpen } = useContext(SliderBar);
   const { addTodo, todoData, setTodoData } = useContext(ListData);
 
@@ -70,8 +74,6 @@ function RightBar() {
         ...prevTodoData,
         id: prevTodoData.title,
       }));
-
-      console.log(todoData); // This may still log the previous value
 
       // Call addTodo inside the callback function to ensure the updated todoData is used
       setTodoData((updatedTodoData) => {
@@ -85,6 +87,7 @@ function RightBar() {
       setRightBarOpen(false);
     }
   };
+
   return (
     <>
       <CssBaseline />
@@ -121,6 +124,7 @@ function RightBar() {
           value={todoData.title || ""}
           onChange={(e) => setTodoData({ ...todoData, title: e.target.value })}
         />
+
         <textarea
           name="description"
           id=""
@@ -131,6 +135,7 @@ function RightBar() {
           value={todoData.desc || ""}
           onChange={(e) => setTodoData({ ...todoData, desc: e.target.value })}
         ></textarea>
+
         <SaveBtn fun={handleSaveTodo} />
       </Drawer>
     </>

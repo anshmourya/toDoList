@@ -1,5 +1,4 @@
 import React, { useContext, useRef, useEffect } from "react";
-import { ThemeProvider } from "../../hooks/Dark&LightMode/Theme";
 import { SliderBar } from "../../hooks/SideBar/SliderBarData";
 import { styled, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
@@ -225,9 +224,9 @@ function SideBar() {
             <li className="flex items-center justify-start gap-4 mt-5">
               <LanguageIcon />
               {/*Themeprvider to change the mode of the website */}
-              <ThemeProvider>
-                <Themebtn />
-              </ThemeProvider>
+              {/* <ThemeProvider> */}
+              <Themebtn />
+              {/* </ThemeProvider> */}
             </li>
           </ul>
         ) : (

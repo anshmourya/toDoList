@@ -52,7 +52,7 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   },
 }));
 
-function Themebtn() {
+function ModeBtn() {
   return (
     <>
       <FormGroup>
@@ -64,4 +64,4 @@ function Themebtn() {
   );
 }
 
-export default Themebtn;
+export default ModeBtn;

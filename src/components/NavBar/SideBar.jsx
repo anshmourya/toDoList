@@ -14,7 +14,7 @@ import MailIcon from "@mui/icons-material/Mail";
 import BuyBtn from "../buttons/BuyBtn";
 import BalBtn from "../buttons/BalBtn";
 import LanguageIcon from "@mui/icons-material/Language";
-import Themebtn from "../buttons/tooglebtn/themebtn";
+import ModeBtn from "../buttons/tooglebtn/ModeBtn";
 import { leftToRight, rotate360 } from "../../Animation/MainAnimation";
 import { BsArrowRight } from "react-icons/bs";
 const drawerWidth = 240;
@@ -225,7 +225,7 @@ function SideBar() {
               <LanguageIcon />
               {/*Themeprvider to change the mode of the website */}
               {/* <ThemeProvider> */}
-              <Themebtn />
+              <ModeBtn />
               {/* </ThemeProvider> */}
             </li>
           </ul>

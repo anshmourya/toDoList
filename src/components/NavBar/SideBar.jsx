@@ -1,4 +1,5 @@
-import React, { useContext, useRef } from "react";
+import React, { useContext, useRef, useEffect } from "react";
+import { ThemeProvider } from "../../hooks/Dark&LightMode/Theme";
 import { SliderBar } from "../../hooks/SideBar/SliderBarData";
 import { styled, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
@@ -17,10 +18,8 @@ import BuyBtn from "../buttons/BuyBtn";
 import BalBtn from "../buttons/BalBtn";
 import LanguageIcon from "@mui/icons-material/Language";
 import Themebtn from "../buttons/tooglebtn/themebtn";
-import { leftToRight } from "../../Animation/MainAnimation";
-import { gsap } from "gsap";
-import { useEffect } from "react";
-
+import { leftToRight, rotate360 } from "../../Animation/MainAnimation";
+import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
 const drawerWidth = 240;
 
 // Mixins for the opened and closed state of the drawer
@@ -130,12 +129,13 @@ function SideBar() {
                 onClick={() => {
                   setOpen(!open);
                 }}
+                ref={(ref) => rotate360(ref)}
               >
                 {theme.direction === "rtl" ? (
-                  <ChevronRightIcon className="text-white" />
+                  <BsArrowRight className="text-white" />
                 ) : (
                   <>
-                    <ChevronLeftIcon className="text-white" />
+                    <BsArrowRight className="text-white" />
                   </>
                 )}
               </IconButton>
@@ -148,70 +148,73 @@ function SideBar() {
               setOpen(!open);
               anim();
             }}
+            ref={(ref) => rotate360(ref)}
           >
             {theme.direction === "rtl" ? (
-              <ChevronRightIcon className="text-white" />
+              <BsArrowRight className="text-white" />
             ) : (
-              <ChevronLeftIcon className="text-white" />
+              <BsArrowRight className="text-white" />
             )}
           </IconButton>
         )}
         <Divider />
 
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => {
-            return (
-              // Render list items for each menu item
-              <ListItem
-                key={text}
-                sx={{
-                  display: "block",
-                  transition: "0.2s ease-in-out",
-                  "&:hover": {
-                    backgroundColor: "black",
-                    "& .MuiTypography-root": {
-                      color: "#fff",
-                    },
-                    "& .MuiButtonBase-root": {
-                      backgroundColor: "#353945",
-                      borderRadius: "12px",
-                    },
-                    "& .MuiSvgIcon-root": {
-                      color: "#fff",
-                    },
-                  },
-                }}
-                ref={(ref) => (listItemRefs.current[index] = ref)}
-              >
-                <ListItemButton
+          {["Home", "Section 1", "Section 2", "Section 8"].map(
+            (text, index) => {
+              return (
+                // Render list items for each menu item
+                <ListItem
+                  key={text}
                   sx={{
-                    minHeight: 48,
-                    justifyContent: open ? "initial" : "center",
-                    px: 1.5,
+                    display: "block",
+                    transition: "0.2s ease-in-out",
+                    "&:hover": {
+                      backgroundColor: "black",
+                      "& .MuiTypography-root": {
+                        color: "#fff",
+                      },
+                      "& .MuiButtonBase-root": {
+                        backgroundColor: "#353945",
+                        borderRadius: "12px",
+                      },
+                      "& .MuiSvgIcon-root": {
+                        color: "#fff",
+                      },
+                    },
                   }}
+                  ref={(ref) => (listItemRefs.current[index] = ref)}
                 >
-                  <ListItemIcon
+                  <ListItemButton
                     sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : "auto",
-                      justifyContent: "center",
-                      alignItems: "center",
+                      minHeight: 48,
+                      justifyContent: open ? "initial" : "center",
+                      px: 1.5,
                     }}
                   >
-                    <MailIcon className="text-gray-500" />
-                    {open && (
-                      <ListItemText
-                        primary={text}
-                        sx={{ opacity: open ? 1 : 0 }}
-                        className="px-3 text-sm font-semibold text-gray-500 capitalize"
-                      />
-                    )}
-                  </ListItemIcon>
-                  <ListItemText sx={{ opacity: open ? 1 : 0 }} />
-                </ListItemButton>
-              </ListItem>
-            );
-          })}
+                    <ListItemIcon
+                      sx={{
+                        minWidth: 0,
+                        mr: open ? 3 : "auto",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                    >
+                      <MailIcon className="text-gray-500" />
+                      {open && (
+                        <ListItemText
+                          primary={text}
+                          sx={{ opacity: open ? 1 : 0 }}
+                          className="px-3 text-sm font-semibold text-gray-500 capitalize"
+                        />
+                      )}
+                    </ListItemIcon>
+                    <ListItemText sx={{ opacity: open ? 1 : 0 }} />
+                  </ListItemButton>
+                </ListItem>
+              );
+            }
+          )}
         </List>
 
         {open ? (
@@ -223,7 +226,10 @@ function SideBar() {
             </li>
             <li className="flex items-center justify-start gap-4 mt-5">
               <LanguageIcon />
-              <Themebtn />
+              {/*Themeprvider to change the mode of the website */}
+              <ThemeProvider>
+                <Themebtn />
+              </ThemeProvider>
             </li>
           </ul>
         ) : (

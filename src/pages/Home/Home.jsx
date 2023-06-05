@@ -9,7 +9,7 @@ function Home() {
 
   return (
     <>
-      <div className="">
+      <div className="aaaaa">
         <SideBar /> {/* Render the SideBar component */}
         <div
           style={{

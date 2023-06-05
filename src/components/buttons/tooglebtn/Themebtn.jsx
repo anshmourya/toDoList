@@ -1,10 +1,10 @@
-import * as React from "react";
+import React, { useContext } from "react";
+import { ThemeMode } from "../../../hooks/Dark&LightMode/Theme";
 import { styled } from "@mui/material/styles";
 import FormGroup from "@mui/material/FormGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Switch from "@mui/material/Switch";
-import Stack from "@mui/material/Stack";
-import Typography from "@mui/material/Typography";
+
 const MaterialUISwitch = styled(Switch)(({ theme }) => ({
   width: 62,
   height: 34,
@@ -53,11 +53,21 @@ const MaterialUISwitch = styled(Switch)(({ theme }) => ({
 }));
 
 function Themebtn() {
+  const { handelTheme } = useContext(ThemeMode);
+
   return (
     <>
       <FormGroup>
         <FormControlLabel
-          control={<MaterialUISwitch sx={{ mx: 1 }} defaultChecked />}
+          control={
+            <MaterialUISwitch
+              sx={{ mx: 1 }}
+              defaultChecked
+              onClick={() => {
+                handelTheme();
+              }}
+            />
+          }
         />
       </FormGroup>
     </>

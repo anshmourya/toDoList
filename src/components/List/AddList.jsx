@@ -1,4 +1,6 @@
 import React, { useState, useContext } from "react";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import { ListData } from "../../hooks/ListHooks/ListData";
 import PlusBtn from "../buttons/Editbtns/PlusBtn";
 
@@ -13,7 +15,16 @@ function AddList({ title }) {
   const handleAddList = () => {
     if (!title) {
       if (!singleListData.title) {
-        alert("Please select a title");
+        toast("List Can't Be Empty", {
+          position: "top-center",
+          autoClose: 2000,
+          hideProgressBar: false,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          progress: 0,
+          theme: "dark",
+        });
       } else {
         const newList = {
           id: singleListData.title,
@@ -23,8 +34,6 @@ function AddList({ title }) {
         setSingleListData({ id: "", title: "" });
         console.log(lists);
       }
-    } else {
-      console.log("ansh");
     }
   };
 
@@ -45,6 +54,7 @@ function AddList({ title }) {
         {/* Render the PlusBtn component only if the title prop is not provided */}
         {!title && <PlusBtn fun={handleAddList} />}
       </div>
+      <ToastContainer />
     </>
   );
 }

@@ -1,11 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import AddList from "./AddList";
 import AddTodo from "./AddTodo";
 
+
 function Lists({ data }) {
-  // Check if the 'data' prop is defined before destructuring its properties
+
+
+
+
   if (!data) {
-    // Render the AddList component if 'data' is not defined
     return (
       <div className="m-5">
         <AddList />
@@ -16,7 +19,7 @@ function Lists({ data }) {
   const { title, todos, id } = data;
 
   return (
-    <div className="m-5">
+    <div className="m-5" >
       {/* Render the AddList component with the 'title' prop */}
       <AddList title={title} />
       {/* Render the AddTodo component with the 'listId' prop */}

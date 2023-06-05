@@ -8,7 +8,7 @@ import { BsPencilFill } from "react-icons/bs";
 
 function AddTodo({ listId, todoitem }) {
   // Accessing the SliderBar context to control the right sidebar state
-  const { setRightBarOpen, rightBarOpen } = useContext(SliderBar);
+  const { setRightBarOpen } = useContext(SliderBar);
 
   // Accessing the ListData context to set and retrieve todo data
   const { setTodoData, todoData } = useContext(ListData);

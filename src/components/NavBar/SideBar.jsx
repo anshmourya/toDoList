@@ -7,8 +7,6 @@ import List from "@mui/material/List";
 import CssBaseline from "@mui/material/CssBaseline";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
-import ChevronRightIcon from "@mui/icons-material/ChevronRight";
 import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
 import ListItemIcon from "@mui/material/ListItemIcon";
@@ -19,7 +17,7 @@ import BalBtn from "../buttons/BalBtn";
 import LanguageIcon from "@mui/icons-material/Language";
 import Themebtn from "../buttons/tooglebtn/themebtn";
 import { leftToRight, rotate360 } from "../../Animation/MainAnimation";
-import { BsArrowLeft, BsArrowRight } from "react-icons/bs";
+import { BsArrowRight } from "react-icons/bs";
 const drawerWidth = 240;
 
 // Mixins for the opened and closed state of the drawer

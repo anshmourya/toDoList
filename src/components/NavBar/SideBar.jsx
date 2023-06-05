@@ -1,4 +1,4 @@
-import React, { useContext } from "react";
+import React, { useContext, useRef } from "react";
 import { SliderBar } from "../../hooks/SideBar/SliderBarData";
 import { styled, useTheme } from "@mui/material/styles";
 import MuiDrawer from "@mui/material/Drawer";
@@ -17,6 +17,9 @@ import BuyBtn from "../buttons/BuyBtn";
 import BalBtn from "../buttons/BalBtn";
 import LanguageIcon from "@mui/icons-material/Language";
 import Themebtn from "../buttons/tooglebtn/themebtn";
+import { leftToRight } from "../../Animation/MainAnimation";
+import { gsap } from "gsap";
+import { useEffect } from "react";
 
 const drawerWidth = 240;
 
@@ -82,9 +85,18 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 function SideBar() {
+  const listItemRefs = useRef([]);
   const theme = useTheme();
   const { open, setOpen } = useContext(SliderBar);
 
+  const anim = () => {
+    listItemRefs.current.forEach((ref, index) => {
+      leftToRight(ref, index);
+    });
+  };
+  useEffect(() => {
+    anim();
+  }, []);
   return (
     <>
       <CssBaseline />
@@ -114,7 +126,11 @@ function SideBar() {
                   NAME
                 </h2>
               </div>
-              <IconButton onClick={() => setOpen(!open)}>
+              <IconButton
+                onClick={() => {
+                  setOpen(!open);
+                }}
+              >
                 {theme.direction === "rtl" ? (
                   <ChevronRightIcon className="text-white" />
                 ) : (
@@ -127,7 +143,12 @@ function SideBar() {
           </>
         ) : (
           // Render only the toggle button when the drawer is closed
-          <IconButton onClick={() => setOpen(!open)}>
+          <IconButton
+            onClick={() => {
+              setOpen(!open);
+              anim();
+            }}
+          >
             {theme.direction === "rtl" ? (
               <ChevronRightIcon className="text-white" />
             ) : (
@@ -138,7 +159,7 @@ function SideBar() {
         <Divider />
 
         <List>
-          {["Inbox", "Starred", "Send email", "Drafts"].map((text) => {
+          {["Inbox", "Starred", "Send email", "Drafts"].map((text, index) => {
             return (
               // Render list items for each menu item
               <ListItem
@@ -160,6 +181,7 @@ function SideBar() {
                     },
                   },
                 }}
+                ref={(ref) => (listItemRefs.current[index] = ref)}
               >
                 <ListItemButton
                   sx={{
